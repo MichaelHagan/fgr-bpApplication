@@ -17,7 +17,7 @@ const httpClient = (url, options = {}) => {
   return fetchUtils.fetchJson(url, options);
 };
 
-const dataProvider = Provider('http://localhost:9000', httpClient);
+const dataProvider = Provider('https://fgrbpresume.onrender.com', httpClient);
 
 const App = () => (
 

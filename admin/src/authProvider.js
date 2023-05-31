@@ -4,7 +4,7 @@ export const authProvider = {
   // called when the user attempts to log in
   login: async ({ emailorphone, password }) => {
     try {
-      let res = await axios.post("http://localhost:9000/admins/login", {
+      let res = await axios.post("https://fgrbpresume.onrender.com/admins/login", {
             email: emailorphone,
             password,
           });
