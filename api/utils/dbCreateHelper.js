@@ -6,7 +6,7 @@ const dbConfig = {
   user: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   port: 5432,
-  host: 'postgres://michael_hagan:07drazN4YhQDcMviELt8kgJ4i5Glh5dT@dpg-chrt0qe4dadfn67jcjb0-a/fgrbp_resume'
+  host: 'dpg-chrt0qe4dadfn67jcjb0-a'
 };
 
 
