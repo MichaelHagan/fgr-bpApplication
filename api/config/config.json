@@ -3,21 +3,21 @@
     "username": "michael_hagan",
     "password": "07drazN4YhQDcMviELt8kgJ4i5Glh5dT",
     "database": "fgrbp_resume",
-    "host": "postgres://michael_hagan:07drazN4YhQDcMviELt8kgJ4i5Glh5dT@dpg-chrt0qe4dadfn67jcjb0-a/fgrbp_resume",
+    "host": "dpg-chrt0qe4dadfn67jcjb0-a",
     "dialect": "postgres"
   },
   "test": {
     "username": "michael_hagan",
     "password": "07drazN4YhQDcMviELt8kgJ4i5Glh5dT",
     "database": "fgrbp_resume",
-    "host": "postgres://michael_hagan:07drazN4YhQDcMviELt8kgJ4i5Glh5dT@dpg-chrt0qe4dadfn67jcjb0-a/fgrbp_resume",
+    "host": "dpg-chrt0qe4dadfn67jcjb0-a",
     "dialect": "postgres"
   },
   "production": {
     "username": "michael_hagan",
     "password": "07drazN4YhQDcMviELt8kgJ4i5Glh5dT",
     "database": "fgrbp_resume",
-    "host": "postgres://michael_hagan:07drazN4YhQDcMviELt8kgJ4i5Glh5dT@dpg-chrt0qe4dadfn67jcjb0-a/fgrbp_resume",
+    "host": "dpg-chrt0qe4dadfn67jcjb0-a",
     "dialect": "postgres"
   }
 }
