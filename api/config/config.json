@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "fgr_db",
-    "host": "127.0.0.1",
+    "username": "michael_hagan",
+    "password": "07drazN4YhQDcMviELt8kgJ4i5Glh5dT",
+    "database": "fgrbp_resume",
+    "host": "postgres://michael_hagan:07drazN4YhQDcMviELt8kgJ4i5Glh5dT@dpg-chrt0qe4dadfn67jcjb0-a/fgrbp_resume",
     "dialect": "postgres"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
+    "username": "michael_hagan",
+    "password": "07drazN4YhQDcMviELt8kgJ4i5Glh5dT",
+    "database": "fgrbp_resume",
+    "host": "postgres://michael_hagan:07drazN4YhQDcMviELt8kgJ4i5Glh5dT@dpg-chrt0qe4dadfn67jcjb0-a/fgrbp_resume",
     "dialect": "postgres"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "michael_hagan",
+    "password": "07drazN4YhQDcMviELt8kgJ4i5Glh5dT",
+    "database": "fgrbp_resume",
+    "host": "postgres://michael_hagan:07drazN4YhQDcMviELt8kgJ4i5Glh5dT@dpg-chrt0qe4dadfn67jcjb0-a/fgrbp_resume",
     "dialect": "postgres"
   }
 }
