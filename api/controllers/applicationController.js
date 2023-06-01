@@ -9,7 +9,7 @@ const getAllApplications = async (req, res) => {
 
         console.log(req.query);
         let collumn = req.query._sort;
-        let filter = req.query.q;
+        let filter = req.query.id;
 
         Application.findAll()
             .then(applications => {
