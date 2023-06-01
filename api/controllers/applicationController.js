@@ -6,6 +6,8 @@ const { cloudinary } = require('../config/cloudinary');
 const getAllApplications = async (req, res) => {
 
     try {
+
+        console.log(req.query);
         let collumn = req.query._sort;
         let filter = req.query.q;
 
