@@ -10,7 +10,6 @@ import {
     TextInput,
     maxLength,
     FunctionField,
-    SearchInput,
     Filter
   } from 'react-admin';
   const validateName = maxLength(30, "Maximum number of characters exceeded.(max:30 characters)");

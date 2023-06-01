@@ -12,11 +12,11 @@ const {
 } = require("../controllers/applicationController");
 
 //Get all applications
-router.get('/', getAllApplications)
+router.get('/', authenticate, getAllApplications)
 
 
 //Get single application
-router.get('/:id', getApplicationById)
+router.get('/:id', authenticate, getApplicationById)
 
 //Add application
 router.post('/', upload.single('file'), addApplication)

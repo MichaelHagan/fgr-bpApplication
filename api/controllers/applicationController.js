@@ -101,6 +101,7 @@ const editApplicationById = async (req, res) => {
         let output_str = "";
 
         let collumns = [
+            "id",
             "name",
             "email",
             "phone"

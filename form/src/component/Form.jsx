@@ -1,37 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, CSSProperties } from "react";
 import back from "../assets/back.jfif";
+import axios from 'axios';
+import Swal from 'sweetalert2'
+import ClipLoader from "react-spinners/ClipLoader";
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
 
 const Form = () => {
   const [name, setName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [file, setFile] = useState(null);
   const [nameError, setNameError] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState(false);
   const [fileError, setFileError] = useState(false);
+  const [loader, setLoader] = useState(false);
+  let [color, setColor] = useState("#0000ff");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    console.log("here:", name, phone, email, file);
+
     if (validateForm()) {
       const formData = new FormData();
-      formData.append("name", name);
-      formData.append("phoneNumber", phoneNumber);
       formData.append("file", file);
+      formData.append('data', JSON.stringify({
+        name,
+        phone,
+        email
+      }));
+      setLoader(true);
 
-      // Make your API call here using fetch or axios
-      fetch("https://fgrbpresume.onrender.com/applications", {
-        method: "POST",
-        body: formData,
+      axios
+      .post('https://fgrbpresume.onrender.com/applications', formData)
+      .then((response) => {
+        // Handle the response from the API
+        setLoader(false);
+        Swal.fire(
+          'Application Submited!',
+          'Our team will update you on any update',
+          'success'
+        )
+        setName("");
+        setEmail("");
+        setPhone("");
+        setFile(null);
       })
-        .then((response) => response.json())
-        .then((data) => {
-          // Handle the response from the API
-          console.log("Response:", data);
-        })
-        .catch((error) => {
-          // Handle any errors that occurred during the API call
-          console.error("Error:", error);
-        });
+      .catch((error) => {
+        // Handle any errors that occurred during the API call
+        setLoader(false);
+        Swal.fire(
+          'Something went wrong.',
+          'Check your internet connection and try again.',
+          'success'
+        )
+      });
     }
   };
 
@@ -41,7 +69,7 @@ const Form = () => {
   };
 
   const handlePhoneNumberChange = (e) => {
-    setPhoneNumber(e.target.value);
+    setPhone(e.target.value);
     setPhoneNumberError(false);
   };
 
@@ -53,7 +81,7 @@ const Form = () => {
       isValid = false;
     }
 
-    if (phoneNumber.trim() === "") {
+    if (phone.trim() === "") {
       setPhoneNumberError(true);
       isValid = false;
     }
@@ -70,6 +98,14 @@ const Form = () => {
       className="flex flex-col items-center justify-center min-h-screen bg-cover bg-no-repeat"
       style={{ backgroundImage: `url(${back})` }}
     >
+        <ClipLoader
+        color={color}
+        loading={loader}
+        cssOverride={override}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
       <div className="w-[50%] p-[50px] shadow">
         <h2 className="text-[26px] font-bold text-uppercase text-center mb-5">
           Upload CV Here
@@ -96,6 +132,26 @@ const Form = () => {
           </div>
 
           <div>
+            <label htmlFor="name" className="text-lg font-medium text-gray-700">
+              Email
+            </label>
+            <input
+              type="text"
+              id="email"
+              className={`w-full border ${
+                nameError ? "border-red-500" : "border-blue-500"
+              } rounded-lg px-4 py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              value={email}
+              onChange={(e)=>setEmail(e.value)}
+            />
+            {nameError && (
+              <p className="text-red-500 text-sm mt-1">
+                Please enter your name.
+              </p>
+            )}
+          </div>
+
+          <div>
             <label
               htmlFor="phone"
               className="text-lg font-medium text-gray-700"
@@ -108,7 +164,7 @@ const Form = () => {
               className={`w-full border ${
                 phoneNumberError ? "border-red-500" : "border-blue-500"
               } rounded-lg px-4 py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500`}
-              value={phoneNumber}
+              value={phone}
               onChange={handlePhoneNumberChange}
             />
             {phoneNumberError && (
@@ -135,7 +191,7 @@ const Form = () => {
             )}
           </div>
 
-          <div className="flex flex-row-reverse text-[blue] cursor-pointer">
+          <div className="flex flex-row-reverse text-[#0000ff] cursor-pointer">
             <a
             href="https://fgr-bp-application.vercel.app/#/login">
             Click here to access the admin panel
