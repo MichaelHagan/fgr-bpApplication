@@ -43,7 +43,7 @@ export default function LoginPage() {
               <div className="input-error">{errors.inputs}</div>
               <div className="mb-3">
                 <label className="form-label">
-                  Email or Phone
+                  Email
                 </label>
                 <input
                   value={emailorphone}

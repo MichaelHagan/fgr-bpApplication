@@ -28,6 +28,12 @@
   background-color: #fcfcfc;
   border-radius: 1rem;
 }
+
+.form-control{
+width:38%;
+margin-bottom:1.5rem;
+}
+
 .title {
   text-align: center;
   padding-bottom: 1rem;
