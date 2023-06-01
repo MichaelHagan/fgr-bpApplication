@@ -85,12 +85,29 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson): DataProvider => ({
         ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
 
     create: (resource, params) => {
-        return httpClient(`${apiUrl}/${resource}`, {
+        if (resource === 'applications') {
+            const formData = new FormData();
+
+            if (params.data.resumeUrl && params.data.resumeUrl.rawFile instanceof File) {
+                formData.append('file', params.data.resumeUrl.rawFile);
+            }
+
+            const { resumeUrl, ...otherParams } = params.data;
+
+            formData.append('data', JSON.stringify(otherParams));
+
+            return httpClient(`${apiUrl}/${resource}`, {
+                method: 'POST',
+                body: formData,
+            }).then(({ json }) => ({ data: { ...params.data, id: json.id } }));
+        }
+       else{ return httpClient(`${apiUrl}/${resource}`, {
             method: 'POST',
             body: JSON.stringify(params.data),
         }).then(({ json }) => ({
             data: { ...params.data, id: json.id },
         }))
+    }
     }
         ,
     delete: (resource, params) =>
@@ -107,11 +124,27 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson): DataProvider => ({
                 })
             )
         ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
-    update: (resource, params) => { 
+    update: (resource, params) => {
+        if (resource === 'applications') {
+            const formData = new FormData();
+
+            if (params.data.resumeUrl && params.data.resumeUrl.rawFile instanceof File) {
+                formData.append('file', params.data.resumeUrl.rawFile);
+            }
+
+            const { resumeUrl, ...otherParams } = params.data;
+
+            formData.append('data', JSON.stringify(otherParams));
+
+            return httpClient(`${apiUrl}/${resource}/${params.id}`, {
+                method: 'PUT',
+                body: formData,
+            }).then(({ json }) => ({ data: { id: params.id, ...json } }));
+        } else {
             return httpClient(`${apiUrl}/${resource}/${params.id}`, {
                 method: 'PUT',
                 body: JSON.stringify(params.data),
             }).then(({ json }) => ({ data: { id: params.id, ...json } }));
-        
+        }
     }
 });

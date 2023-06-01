@@ -7,13 +7,19 @@ const getAllApplications = async (req, res) => {
 
     try {
         let collumn = req.query._sort;
+        let filter = req.query.q;
 
         Application.findAll()
             .then(applications => {
                 res.header('Access-Control-Expose-Headers', 'X-Total-Count');
                 res.header('X-Total-Count', `${applications.length}`);
 
-                if (collumn === "id") {
+                if (filter) {
+                    // Apply the filter logic
+                    applications = applications.filter((app) =>
+                      app.id.toString().includes(filter) // Adjust the filtering condition based on your requirements
+                    );
+                  } else if (collumn === "id") {
                     req.query._order === "ASC" ? applications.sort((a, b) => parseInt(a[collumn]) - parseInt(b[collumn])) : applications.sort((a, b) => parseInt(b[collumn]) - parseInt(a[collumn]));
                     applications = applications.slice(req.query._start, req.query._end);
                 } else if ( collumn === "createdAt" || collumn === "updatedAt") {

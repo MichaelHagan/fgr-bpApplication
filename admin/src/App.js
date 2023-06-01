@@ -1,5 +1,5 @@
 import { fetchUtils, Admin, Resource } from "react-admin";
-import { ApplicationList } from "./components/applications/Applications";
+import { ApplicationList, ApplicationCreate, ApplicationEdit } from "./components/applications/Applications";
 import {AdminList, AdminEdit, AdminCreate} from "./components/admins/Admins";
 import LoginPage from "./components/login/LoginPage";
 import Provider from "./dataProvider.ts";
@@ -30,6 +30,8 @@ const App = () => (
     <Resource 
     name="applications" 
     list={ApplicationList} 
+    edit={ApplicationEdit}  
+    create={ApplicationCreate}
     icon={WorkOutlineIcon} 
     />
 
