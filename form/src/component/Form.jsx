@@ -136,7 +136,10 @@ const Form = () => {
           </div>
 
           <div className="flex flex-row-reverse text-[blue] cursor-pointer">
+            <a
+            href="https://fgr-bp-application.vercel.app/#/login">
             Click here to access the admin panel
+            </a>
           </div>
 
           <button
