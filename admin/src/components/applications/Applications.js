@@ -38,7 +38,9 @@ import {
             <FunctionField
             label="Download Resume"
             render={(record) => (
-              <button onClick={() => handleDownloadResume(record.resumeUrl)}>
+              <button onClick={(e) => {
+                e.stopPropagation();
+                handleDownloadResume(record.resumeUrl)}}>
                 Download
               </button>
             )}
