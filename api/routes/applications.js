@@ -19,10 +19,10 @@ router.get('/', getAllApplications)
 router.get('/:id', getApplicationById)
 
 //Add application
-router.post('/', authenticate, upload.single('image'), addApplication)
+router.post('/', authenticate, upload.single('file'), addApplication)
 
 //Update application
-router.put('/:id', authenticate, upload.single('image'), editApplicationById)
+router.put('/:id', authenticate, upload.single('file'), editApplicationById)
 
 //Delete application
 router.delete('/:id', authenticate, deleteApplicationById)

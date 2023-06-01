@@ -85,29 +85,12 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson): DataProvider => ({
         ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
 
     create: (resource, params) => {
-        if (resource === 'foods') {
-            const formData = new FormData();
-
-            if (params.data.imageUrl && params.data.imageUrl.rawFile instanceof File) {
-                formData.append('image', params.data.imageUrl.rawFile);
-            }
-
-            const { imageUrl, ...otherParams } = params.data;
-
-            formData.append('data', JSON.stringify(otherParams));
-
-            return httpClient(`${apiUrl}/${resource}`, {
-                method: 'POST',
-                body: formData,
-            }).then(({ json }) => ({ data: { ...params.data, id: json.id } }));
-        }
-       else{ return httpClient(`${apiUrl}/${resource}`, {
+        return httpClient(`${apiUrl}/${resource}`, {
             method: 'POST',
             body: JSON.stringify(params.data),
         }).then(({ json }) => ({
             data: { ...params.data, id: json.id },
         }))
-    }
     }
         ,
     delete: (resource, params) =>
@@ -124,27 +107,11 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson): DataProvider => ({
                 })
             )
         ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
-    update: (resource, params) => {
-        if (resource === 'foods') {
-            const formData = new FormData();
-
-            if (params.data.imageUrl && params.data.imageUrl.rawFile instanceof File) {
-                formData.append('image', params.data.imageUrl.rawFile);
-            }
-
-            const { imageUrl, ...otherParams } = params.data;
-
-            formData.append('data', JSON.stringify(otherParams));
-
-            return httpClient(`${apiUrl}/${resource}/${params.id}`, {
-                method: 'PUT',
-                body: formData,
-            }).then(({ json }) => ({ data: { id: params.id, ...json } }));
-        } else {
+    update: (resource, params) => { 
             return httpClient(`${apiUrl}/${resource}/${params.id}`, {
                 method: 'PUT',
                 body: JSON.stringify(params.data),
             }).then(({ json }) => ({ data: { id: params.id, ...json } }));
-        }
+        
     }
 });
