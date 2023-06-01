@@ -7,7 +7,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 const override = {
   display: "block",
   margin: "0 auto",
-  borderColor: "red",
+  borderColor: "#0000ff",
 };
 
 const Form = () => {
@@ -19,7 +19,7 @@ const Form = () => {
   const [phoneNumberError, setPhoneNumberError] = useState(false);
   const [fileError, setFileError] = useState(false);
   const [loader, setLoader] = useState(false);
-  let [color, setColor] = useState("#0000ff");
+  const [color, setColor] = useState("#0000ff");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -102,7 +102,7 @@ const Form = () => {
         color={color}
         loading={loader}
         cssOverride={override}
-        size={150}
+        size={50}
         aria-label="Loading Spinner"
         data-testid="loader"
       />

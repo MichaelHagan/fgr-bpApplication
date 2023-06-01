@@ -2,29 +2,41 @@ import React, { useState } from 'react';
 import './LoginPage.css';
 import { useLogin, useNotify } from 'react-admin';
 import LockPersonIcon from '@mui/icons-material/LockPerson';
+import ClipLoader from "react-spinners/ClipLoader";
 
-
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "#0d6efd",
+};
 
 export default function LoginPage() {
 
   const [emailorphone, setEmailorphone] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [loader, setLoader] = useState(false);
+  const [color, setColor] = useState("#0000ff");
   const login = useLogin();
   const notify = useNotify();
 
   const handleSubmit = async (e) => {
+    setLoader(true);
     e.preventDefault();
-    await login({ emailorphone, password }).catch(() =>
+    login({ emailorphone, password }).then((res)=>{
+      setLoader(false);
+      window.location.reload();
+    }).catch(() =>
       notify('Invalid email or password')
     );
-    window.location.reload();
   };
 
 
   return (
     <div>
+      <div className='front'>
       <div className="bg-img"></div>
+      </div>
       <div className="form-container login">
         <div className='title' >
           <LockPersonIcon fontSize='large' style={{
@@ -36,6 +48,16 @@ export default function LoginPage() {
             padding: '5px'
           }} />
           <h5 style={{ marginTop: '.7rem' }}>Admin Login</h5>
+        </div>
+        <div>
+        <ClipLoader
+        color={color}
+        loading={loader}  
+        cssOverride={override}
+        size={50}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
         </div>
         <div className="registration-form row">
           <div className="col-md-12">
